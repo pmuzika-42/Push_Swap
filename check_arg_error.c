@@ -1,20 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   check_arg_error.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmuzika <pmuzika@student.42malaga.com>     #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026-02-17 12:57:53 by pmuzika           #+#    #+#             */
-/*   Updated: 2026-02-17 12:57:53 by pmuzika          ###   ########.fr       */
+/*   Created: 2026-03-16 12:04:56 by pmuzika           #+#    #+#             */
+/*   Updated: 2026-03-16 12:04:56 by pmuzika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libft/libft.h"
+#include "push_swap.h"
 
+//check for strings not numerical or exceeding int limits
 
-int	*fill_int_array(int	argc, char **argv)
+static int	is_valid_num(char *str)
+{
+	int		i;
+
+	i = 0;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i])
+	{
+		if (!(ft_isdigit(str[i])))
+			return (0);
+		i++;
+	}
+	if (!(ft_str_is_int(str)))
+		return (0);
+	return (1);
+}
+
+static int	has_valid_arg(int argc, char **argv)
+{
+	int	i;
+
+	i = 0;
+	while (i < argc)
+	{
+		if (!(is_valid_num(argv[i])))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+static int	*create_array(int argc, char **argv)
 {
 	int	*nb_array;
 	int	i;
@@ -31,14 +63,16 @@ int	*fill_int_array(int	argc, char **argv)
 	return (nb_array);
 }
 
-int	has_duplicates(int argc, char **argv)
+// check for duplicates
+
+static int	has_dup(int argc, char **argv)
 {
 	int	*num_array;
 	int	i;
 	int	j;
 
 	i = 0;
-	num_array = fill_int_array(argc, argv);
+	num_array = create_array(argc, argv);
 	if (!num_array)
 		return (-1);
 	while (i < argc - 1)
@@ -55,37 +89,23 @@ int	has_duplicates(int argc, char **argv)
 		}
 		i++;
 	}
+	free(num_array);
 	return (0);
 }
 
-int	main(int argc, char **argv)
+int	check_arg_error(int argc, char **argv)
 {
-	if (argc < 2)
-		return (0);
-	argv++;
-	if (has_duplicates(argc - 1, argv))
-		return (write(2, "Error\n", 6));
+	int	duplicates;
 
-	return (0);
-}
-
-/*
-int	main(int argc, char **argv)
-{
-	int	i;
-
-	i = 0;
-	if (argc < 2)
-		return (0);
-	argv++;
-	if (argc == 2 && (ft_strchr(argv[0], ' ')))
-		argv = ft_split(argv[0], ' ');
-	while (argv[i])
+	if (!(has_valid_arg(argc, argv)))
+		return (1);
+	duplicates = has_dup(argc, argv);
+	if (duplicates < 0)
 	{
-		ft_printf("%s\n", argv[i]);
-		free(argv[i]);
-		i++;
+		ft_free_mtr(argv, 0);
+		exit(1);
 	}
-	free(argv);
+	if (duplicates > 0)
+		return (1);
 	return (0);
-}*/
+}

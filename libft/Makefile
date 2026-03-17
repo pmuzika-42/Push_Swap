@@ -17,11 +17,11 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 SRC = ft_atoi.c \
-      ft_atol.c \
+	  ft_atol.c \
 	  ft_atoll.c \
 	  ft_str_is_int.c \
-      ft_bzero.c \
-      ft_calloc.c \
+	  ft_bzero.c \
+	  ft_calloc.c \
 	  ft_isalnum.c \
 	  ft_isalpha.c \
 	  ft_isascii.c \
@@ -67,21 +67,19 @@ SRC = ft_atoi.c \
 	  ft_char_conversion.c \
 	  ft_count_words.c \
 	  ft_update_count_words_argv.c \
-	  ft_meta_split.c
+	  ft_free_mtr.c \
+	  ft_meta_split.c \
+	  ft_lstadd_back.c \
+	  ft_lstadd_front.c \
+	  ft_lstclear.c \
+	  ft_lstdelone.c \
+	  ft_lstiter.c \
+	  ft_lstlast.c \
+	  ft_lstmap.c \
+	  ft_lstnew.c \
+	  ft_lstsize.c
 
 OBJ = $(SRC:.c=.o)
-
-BONUS = ft_lstadd_back_bonus.c \
-        ft_lstadd_front_bonus.c \
-		ft_lstclear_bonus.c \
-		ft_lstdelone_bonus.c \
-		ft_lstiter_bonus.c \
-		ft_lstlast_bonus.c \
-		ft_lstmap_bonus.c \
-		ft_lstnew_bonus.c \
-		ft_lstsize_bonus.c
-
-OBJ_BONUS = $(BONUS:.c=.o)
 
 all: $(NAME)
 
@@ -92,14 +90,11 @@ $(NAME) : $(OBJ)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ) $(OBJ_BONUS)
+	rm -f $(OBJ)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
 
-bonus: $(OBJ) $(OBJ_BONUS)
-	ar -rcs $(NAME) $(OBJ) $(OBJ_BONUS)
-
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

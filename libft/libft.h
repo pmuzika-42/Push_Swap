@@ -89,6 +89,7 @@ int			ft_x_conversion(va_list args);
 int			ft_x_upper_conversion(va_list args);
 int			ft_print_percentage(void);
 int			ft_puthex(uintptr_t x, char a);
+void		*ft_free_mtr(char **ptr, int i);
 char		*get_next_line(int fd);
 
 #endif

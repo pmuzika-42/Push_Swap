@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mount_list.c                                       :+:      :+:    :+:   */
+/*   build_stack.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmuzika <pmuzika@student.42malaga.com>     #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,23 +12,25 @@
 
 #include "push_swap.h"
 
-// create new nodes on the future list (code to be slightly rewritten)
+// create a new node
 
-t_sort_list	*ft_lstnew(void *content)
+t_sort_list	*new_node(int nb)
 {
-	t_list	*node;
+	t_sort_list	*node;
 
-	node = malloc(sizeof (t_list));
+	node = malloc(sizeof (t_sort_list));
 	if (!node)
 		return (NULL);
-	node->content = content;
+	node->nb = nb;
 	node->next = NULL;
 	return (node);
 }
 
-t_list	*ft_lstlast(t_list *lst)
+// find last node
+
+t_sort_list	*stack_last(t_sort_list *lst)
 {
-	t_list	*temp;
+	t_sort_list	*temp;
 
 	if (!lst)
 		return (NULL);
@@ -38,15 +40,60 @@ t_list	*ft_lstlast(t_list *lst)
 	return (temp);
 }
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+// add a node at the back of the list
+
+void	stack_add_back(t_sort_list **lst, t_sort_list *new)
 {
-	t_list	*last;
+	t_sort_list	*last;
 
 	if (!*lst)
 	{
 		*lst = new;
 		return ;
 	}
-	last = ft_lstlast(*lst);
+	last = stack_last(*lst);
 	last->next = new;
+}
+
+// free all the nodes of the list
+
+void	free_lst(t_sort_list *lst)
+{
+	t_sort_list	*temp;
+
+	while (lst != NULL)
+	{
+		temp = (lst)->next;
+		free(lst);
+		lst = temp;
+	}
+}
+
+#include <stdio.h>
+
+// fill the stack with args while freeing them
+
+t_sort_list *build_stack(char **argv)
+{
+	t_sort_list	*stack;
+	t_sort_list	*node;
+	int	i;
+
+	stack = NULL;
+	i = 0;
+	while (argv[i] != NULL)
+	{
+		node = new_node(ft_atoi(argv[i]));
+		if (!node)
+		{
+			free_lst(stack);
+			ft_free_mtr(argv, i);
+			exit (1);
+		}
+		stack_add_back(&stack, node);
+		free(argv[i]);
+		i++;
+	}
+	free(argv);
+	return (stack);
 }

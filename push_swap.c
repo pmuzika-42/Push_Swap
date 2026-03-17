@@ -10,103 +10,35 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "push_swap.h"
-#include "libft/libft.h"
+#include "push_swap.h"
 
-//check for strings not numerical or exceeding int limits
+#include <stdio.h>
 
-int	is_valid_num(char *str)
+void	print_lst(t_sort_list *lst)
 {
-	int		i;
-
-	i = 0;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while (str[i])
+	while (lst != NULL)
 	{
-		if (!(ft_isdigit(str[i])))
-			return (0);
-		i++;
+		printf("%d\n", lst->order);
+		lst = lst->next;
 	}
-	if (!(ft_str_is_int(str)))
-		return (0);
-	return (1);
-}
-
-int	has_valid_arg(int argc, char **argv)
-{
-	int	i;
-
-	i = 0;
-	while (i < argc)
-	{
-		if (!(is_valid_num(argv[i])))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	*create_array(int	argc, char **argv)
-{
-	int	*nb_array;
-	int	i;
-
-	i = 0;
-	nb_array = malloc(argc * sizeof(int));
-	if (!nb_array)
-		return (NULL);
-	while (i < argc)
-	{
-		nb_array[i] = ft_atoi(argv[i]);
-		i++;
-	}
-	return (nb_array);
-}
-
-int	has_dup(int argc, char **argv)
-{
-	int	*num_array;
-	int	i;
-	int	j;
-
-	i = 0;
-	num_array = create_array(argc, argv);
-	if (!num_array)
-		return (-1);
-	while (i < argc - 1)
-	{
-		j = i + 1;
-		while (j < argc)
-		{
-			if (num_array[i] == num_array[j])
-			{
-				free(num_array);
-				return (1);
-			}
-			j++;
-		}
-		i++;
-	}
-	free(num_array);
-	return (0);
 }
 
 int	main(int argc, char **argv)
 {
-	int	new_argc;
-	int	duplicates;
+	int			new_argc;
+	t_sort_list	*stack_a;
 
 	if (argc < 2)
 		return (0);
 	argv++;
 	argc -= 1;
 	new_argc = ft_update_count_words_argv(argv, ' ', argc);
-	argv = ft_meta_split(argv, ' ', argc); //free is due
-	duplicates = has_dup(new_argc, argv);
-	if (duplicates < 0)
-		free_matrix(argv); // write the function
-	if (!(has_valid_arg(new_argc, argv)) || duplicates > 0)
+	argv = ft_meta_split(argv, ' ', argc);
+	if (check_arg_error(new_argc, argv))
 		return (write(2, "Error\n", 6));
+	stack_a = build_stack(argv);
+	assign_order_to_lst(stack_a, new_argc);
+	print_lst(stack_a);
+	free_lst(stack_a);
 	return (0);
 }

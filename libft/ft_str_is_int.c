@@ -12,7 +12,7 @@
 
 int	ft_str_is_int(const char *nptr)
 {
-	int		i;
+	int			i;
 	long long	sign;
 	long long	result;
 
