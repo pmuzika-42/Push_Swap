@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_mtr.c                                      :+:      :+:    :+:   */
+/*   pa.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmuzika <pmuzika@student.42malaga.com>     #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026-03-16 11:59:32 by pmuzika           #+#    #+#             */
-/*   Updated: 2026-03-16 11:59:32 by pmuzika          ###   ########.fr       */
+/*   Created: 2026-03-19 17:02:22 by pmuzika           #+#    #+#             */
+/*   Updated: 2026-03-19 17:02:22 by pmuzika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-//freeing malloc'ed matrix and all malloc'ed strings from (i)th to last
-
-void	*ft_free_mtr(char **ptr, int i)
+void	pa(t_sort_list **stack_a, t_sort_list **stack_b)
 {
-	while (ptr[i] != NULL)
-	{
-		free(ptr[i]);
-		i++;
-	}
-	free(ptr);
-	return (NULL);
+	push(stack_a, stack_b);
+	write(1, "pa\n", 3);
 }

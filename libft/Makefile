@@ -67,7 +67,7 @@ SRC = ft_atoi.c \
 	  ft_char_conversion.c \
 	  ft_count_words.c \
 	  ft_update_count_words_argv.c \
-	  ft_free_mtr.c \
+	  ft_free_mtr_from_index.c \
 	  ft_meta_split.c \
 	  ft_lstadd_back.c \
 	  ft_lstadd_front.c \
