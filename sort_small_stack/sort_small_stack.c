@@ -17,6 +17,8 @@ void	sort_small_stack(t_sort_list **stack_a, int argc)
 	t_sort_list	*stack_b;
 
 	stack_b = NULL;
+	if (stack_is_sorted(*stack_a))
+		return ;
 	if (argc == 2)
 		sa(stack_a);
 	if (argc == 3)

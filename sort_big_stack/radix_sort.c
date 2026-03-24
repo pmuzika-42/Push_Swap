@@ -1,24 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   order_equal_nb.c                                   :+:      :+:    :+:   */
+/*   radix_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmuzika <pmuzika@student.42malaga.com>     #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026-03-19 18:01:29 by pmuzika           #+#    #+#             */
-/*   Updated: 2026-03-19 18:01:29 by pmuzika          ###   ########.fr       */
+/*   Created: 2026-03-20 11:40:57 by pmuzika           #+#    #+#             */
+/*   Updated: 2026-03-20 11:40:57 by pmuzika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// assign order equal to nb
-
-void	order_equal_nb(t_sort_list **lst)
+void	radix_sort(t_sort_list **stack_a, t_sort_list **stack_b, int argc)
 {
-	while (*lst != NULL)
+	int	i;
+	int	j;
+	int	bit_nb;
+	int	num;
+
+	i = 0;
+	bit_nb = bit_size(argc - 1);
+	while (i < bit_nb)
 	{
-		(*lst)->order = (*lst)->nb;
-		*lst = (*lst)->next;
+		j = 0;
+		while (j < argc)
+		{
+			num = (*stack_a)->order;
+			if (((num >> i) & 1) == 1)
+				ra(stack_a);
+			else
+				pb(stack_a, stack_b);
+			j++;
+		}
+		while (*stack_b != NULL)
+			pa(stack_a, stack_b);
+		i++;
 	}
 }

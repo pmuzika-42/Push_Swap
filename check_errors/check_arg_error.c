@@ -17,7 +17,10 @@ int	check_arg_error(int argc, char **argv)
 	int	duplicates;
 
 	if (!(has_valid_arg(argc, argv)))
+	{
+		ft_free_mtr_from_index(argv, 0);
 		return (1);
+	}
 	duplicates = has_dup(argc, argv);
 	if (duplicates < 0)
 	{
@@ -25,6 +28,9 @@ int	check_arg_error(int argc, char **argv)
 		exit(1);
 	}
 	if (duplicates > 0)
+	{
+		ft_free_mtr_from_index(argv, 0);
 		return (1);
+	}
 	return (0);
 }

@@ -1,38 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   assign_order_to_int.c                              :+:      :+:    :+:   */
+/*   sort_big_stack.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmuzika <pmuzika@student.42malaga.com>     #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026-03-17 12:44:42 by pmuzika           #+#    #+#             */
-/*   Updated: 2026-03-17 12:44:42 by pmuzika          ###   ########.fr       */
+/*   Created: 2026-03-19 18:26:02 by pmuzika           #+#    #+#             */
+/*   Updated: 2026-03-19 18:26:02 by pmuzika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	assign_order_to_int(t_sort_list **lst, int argc)
+void	sort_big_stack(t_sort_list **stack_a, int argc)
 {
-	int			nb_min;
-	int			i;
-	t_sort_list	*tmp;
+	t_sort_list	*stack_b;
 
-	i = 0;
-	while (i < argc)
-	{
-		nb_min = initialise_nb_min(*lst);
-		tmp = *lst;
-		while (tmp != NULL)
-		{
-			if (tmp->nb < nb_min && tmp->order < 0)
-				nb_min = tmp->nb;
-			tmp = tmp->next;
-		}
-		tmp = *lst;
-		while (tmp->nb != nb_min)
-			tmp = tmp->next;
-		tmp->order = i;
-		i++;
-	}
+	stack_b = NULL;
+	assign_order_to_lst(stack_a, argc);
+	radix_sort(stack_a, &stack_b, argc);
 }

@@ -28,14 +28,11 @@ SRC = check_errors/check_arg_error.c \
 	  linked_list_operations/stack_add_back.c \
 	  linked_list_operations/stack_add_front.c \
 	  linked_list_operations/stack_last.c \
-	  sort_utils/assign_order_to_int.c \
 	  sort_utils/assign_order_to_lst.c \
 	  sort_utils/get_nb_max.c \
 	  sort_utils/get_nb_min.c \
-	  sort_utils/has_negative_int.c \
 	  sort_utils/initialise_nb_min.c \
 	  sort_utils/initialise_order.c \
-	  sort_utils/order_equal_nb.c \
 	  sort_utils/stack_is_sorted.c \
 	  push_swap_rotate/pa.c \
 	  push_swap_rotate/pb.c \
@@ -53,8 +50,10 @@ SRC = check_errors/check_arg_error.c \
 	  sort_small_stack/sort_stack_of_3.c \
 	  sort_small_stack/sort_stack_of_4.c \
 	  sort_small_stack/sort_stack_of_5.c \
-	  push_swap.c \
-	  sort_big_stack.c
+	  sort_big_stack/sort_big_stack.c \
+	  sort_big_stack/bit_size.c \
+	  sort_big_stack/radix_sort.c \
+	  push_swap.c
 
 OBJ = $(SRC:.c=.o)
 

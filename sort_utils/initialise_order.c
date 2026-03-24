@@ -14,9 +14,12 @@
 
 void	initialise_order(t_sort_list **lst)
 {
-	while (*lst != NULL)
+	t_sort_list	*tmp;
+
+	tmp = *lst;
+	while (tmp != NULL)
 	{
-		(*lst)->order = -1;
-		*lst = (*lst)->next;
+		tmp->order = -1;
+		tmp = tmp->next;
 	}
 }

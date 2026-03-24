@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmuzika <pmuzika@student.42malaga.com>     #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026-03-19 18:04:07 by pmuzika           #+#    #+#             */
-/*   Updated: 2026-03-19 18:04:07 by pmuzika          ###   ########.fr       */
+/*   Created: 2026-03-17 12:44:42 by pmuzika           #+#    #+#             */
+/*   Updated: 2026-03-17 12:44:42 by pmuzika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,26 @@
 
 void	assign_order_to_lst(t_sort_list **lst, int argc)
 {
-	if (!(has_negative_int(*lst)))
-		order_equal_nb(lst);
-	else
+	int			nb_min;
+	int			i;
+	t_sort_list	*tmp;
+
+	initialise_order(lst);
+	i = 0;
+	while (i < argc)
 	{
-		initialise_order(lst);
-		assign_order_to_int(lst, argc);
+		nb_min = initialise_nb_min(*lst);
+		tmp = *lst;
+		while (tmp != NULL)
+		{
+			if (tmp->nb < nb_min && tmp->order < 0)
+				nb_min = tmp->nb;
+			tmp = tmp->next;
+		}
+		tmp = *lst;
+		while (tmp->nb != nb_min)
+			tmp = tmp->next;
+		tmp->order = i;
+		i++;
 	}
 }

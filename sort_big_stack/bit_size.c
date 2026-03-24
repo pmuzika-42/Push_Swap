@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_big_stack.c                                   :+:      :+:    :+:   */
+/*   bit_size.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmuzika <pmuzika@student.42malaga.com>     #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026-03-19 18:26:02 by pmuzika           #+#    #+#             */
-/*   Updated: 2026-03-19 18:26:02 by pmuzika          ###   ########.fr       */
+/*   Created: 2026-03-20 11:40:00 by pmuzika           #+#    #+#             */
+/*   Updated: 2026-03-20 11:40:00 by pmuzika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort_big_stack(t_sort_list **stack_a, int argc)
+int	bit_size(int nb)
 {
-	t_sort_list	*stack_b;
+	int	bit_nb;
 
-	stack_b = NULL;
-	assign_order_to_lst(stack_a, argc);
+	bit_nb = 0;
+	while (nb >> bit_nb != 0)
+		bit_nb++;
+	return (bit_nb);
 }

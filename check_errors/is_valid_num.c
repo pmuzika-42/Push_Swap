@@ -18,8 +18,10 @@ int	is_valid_num(char *str)
 {
 	int		i;
 
+	if (!str || str[0] == '\0')
+		return (0);
 	i = 0;
-	if (str[i] == '-' || str[i] == '+')
+	if ((str[i] == '-' || str[i] == '+') && (ft_isdigit(str[i + 1])))
 		i++;
 	while (str[i])
 	{

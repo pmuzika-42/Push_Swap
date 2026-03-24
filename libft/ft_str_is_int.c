@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 int	ft_str_is_int(const char *nptr)
 {
 	int			i;
@@ -27,6 +29,8 @@ int	ft_str_is_int(const char *nptr)
 			sign = -1;
 		i++;
 	}
+	if (!(ft_isdigit(nptr[i])))
+		return (0);
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
 		result = result * 10 + (nptr[i] - '0');
